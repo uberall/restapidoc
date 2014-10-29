@@ -19,11 +19,6 @@
     <link href="../css/jsondoc/bootstrap.min.css" rel="stylesheet">
     <link href="../css/jsondoc/font-awesome.css" rel="stylesheet" >
     <style type="text/css">
-    body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-    }
-
     .sidebar-nav {
         padding: 9px 0;
     }
@@ -118,7 +113,6 @@
 <blockquote>
   <p style="text-transform: uppercase;">API info</span></p>
   <small>Base path: {{basePath}}</small>
-  <small>Version: {{version}}</small>
 </blockquote>
 </script>
 
@@ -650,8 +644,8 @@
         });
     }
     $(document).ready(function() {
-        var url = document.URL;
-        fetchdoc(url+'/api');
+        var url = window.location.origin;
+        fetchdoc(url+'/apiDoc/restapidoc.json');
     });
 
 </script>
