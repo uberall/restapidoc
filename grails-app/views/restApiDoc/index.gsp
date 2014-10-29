@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSONDoc</title>
+    <title>Uberall - SalesPartner API Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -93,18 +93,6 @@
 </head>
 
 <body>
-
-<div class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand" href="#">JSONDoc</a>
-            <form class="navbar-form pull-left">
-                <input id="jsondocfetch" class="span5" type="text" placeholder="Insert here the JSONDoc URL" autocomplete="off" />
-                <button id="getDocButton" class="btn">Get documentation</button>
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -507,28 +495,6 @@
 <script>
     var model;
 
-    function checkURLExistence() {
-        var value = $("#jsondocfetch").val();
-        if(value.trim() == '') {
-            alert("Please insert a valid URL");
-            return false;
-        } else {
-            return fetchdoc(value);
-        }
-    }
-
-    $("#jsondocfetch").keypress(function(event) {
-        if (event.which == 13) {
-            checkURLExistence();
-            return false;
-        }
-    });
-
-    $("#getDocButton").click(function() {
-        checkURLExistence();
-        return false;
-    });
-
     function printResponse(data, res, url) {
         if(res.responseXML != null) {
             $("#response").text(formatXML(res.responseText));
@@ -684,27 +650,8 @@
         });
     }
     $(document).ready(function() {
-
-        var parseQueryString = function() {
-            var vars = [], hash;
-            var q = document.URL.split('?')[1];
-            if(q != undefined){
-                q = q.split('&');
-                for(var i = 0; i < q.length; i++){
-                    hash = q[i].split('=');
-                    vars.push(hash[1]);
-                    vars[hash[0]] = hash[1];
-                }
-            }
-            return vars;
-        }
-
-        var parameters = parseQueryString();
-        if (parameters['doc_url']) {
-            $('#jsondocfetch').attr('value', parameters['doc_url']);
-            $('#getDocButton').click();
-        }
-
+        var url = document.URL;
+        fetchdoc(url+'/api');
     });
 
 </script>
