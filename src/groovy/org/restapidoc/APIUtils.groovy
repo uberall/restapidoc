@@ -5,6 +5,9 @@ import org.restapidoc.annotation.RestApi
 import org.restapidoc.annotation.RestApiObject
 import org.restapidoc.utils.JSONDocUtilsLight
 
+import java.text.SimpleDateFormat
+
+
 /**
  * Created by stevben on 16/12/13.
  */
@@ -13,7 +16,11 @@ class APIUtils {
 
     static def buildApiRegistry(grailsApplication) {
 
-        String VERSION = grailsApplication.mergedConfig.grails.plugins.restapidoc.docVersion
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String VERSION = sdf.format(cal.getTime());
+
         String BASEPATH = grailsApplication.mergedConfig.grails.plugins.restapidoc.basePath
         String POJO_PKG_TO_SCAN = grailsApplication.mergedConfig.grails.plugins.restapidoc.packageToScan
 
