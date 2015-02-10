@@ -114,6 +114,7 @@
   <p style="text-transform: uppercase;">API info</span></p>
   <small>Base path: {{basePath}}</small>
   <small>Version: {{version}}</small>
+  <small><a href="{{changelogUrl}}">see Changelog</a></small>
 
 </blockquote>
 </script>

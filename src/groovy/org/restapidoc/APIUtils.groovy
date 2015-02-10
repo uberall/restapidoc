@@ -22,6 +22,7 @@ class APIUtils {
         String VERSION = sdf.format(cal.getTime());
 
         String BASEPATH = grailsApplication.mergedConfig.grails.plugins.restapidoc.basePath
+        String CHANGELOG_URL = grailsApplication.mergedConfig.grails.plugins.restapidoc.changelogUrl
         String POJO_PKG_TO_SCAN = grailsApplication.mergedConfig.grails.plugins.restapidoc.packageToScan
 
         String CUSTOM_CLASS_NAME = grailsApplication.mergedConfig.grails.plugins.restapidoc.customClassName
@@ -70,6 +71,7 @@ class APIUtils {
 //        ApiRegistry.jsondoc =
         return ["version": VERSION,
                 "basePath": BASEPATH,
+                "changelogUrl": CHANGELOG_URL,
                 "apis": controllerDoc,
                 "objects": objectsDoc]
 

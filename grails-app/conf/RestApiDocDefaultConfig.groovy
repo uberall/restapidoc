@@ -12,6 +12,8 @@ grails {
             outputFileReading = "restapidoc.json"
             customClassName = null  //"org.restapidoc.CustomResponseDoc"
 
+            changelogUrl = ""
+
             defaultFormat = "json"
 
             defaultResponseType = MediaType.APPLICATION_JSON_VALUE
