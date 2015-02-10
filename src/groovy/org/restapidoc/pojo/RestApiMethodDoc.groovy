@@ -42,11 +42,11 @@ public class RestApiMethodDoc extends ApiMethodDoc {
         def prod = Arrays.asList(annotation.produces())
         def cons = Arrays.asList(annotation.consumes())
 
-        if (cons.isEmpty() && (objVerb == RestApiVerb.POST || objVerb == RestApiVerb.PUT)) {
+        if (cons.isEmpty() && (objVerb == RestApiVerb.POST || objVerb == RestApiVerb.PUT || objVerb == RestApiVerb.PATCH)) {
             //if no cons definition and POST/PUT method => auto put json
             cons = [defaultCons]
         }
-        if (!cons.isEmpty() && (cons.first() == null && cons.first().equals(""))) {
+        if (!cons.isEmpty() && (cons.first() == null || cons.first().equals(""))) {
             //if force set cons to null/empty string, no cons definition
             cons = []
         }
@@ -55,7 +55,7 @@ public class RestApiMethodDoc extends ApiMethodDoc {
             //if no cons definition => auto put json for all verb
             prod = [defaultCons]
         }
-        if (!prod.isEmpty() && (prod.first() == null && prod.first().equals(""))) {
+        if (!prod.isEmpty() && (prod.first() == null || prod.first().equals(""))) {
             //if force set cons to null/empty string, no cons definition
             prod = []
         }
@@ -78,6 +78,10 @@ public class RestApiMethodDoc extends ApiMethodDoc {
     }
 	
     public static RestApiVerb retrieveVerb(String verb) {
+        String verbUpper = verb.toUpperCase()
+        if(verbUpper && verbUpper.trim().equals("*")) {
+            return RestApiVerb.ALL
+        }
         return RestApiVerb.valueOf(verb.toUpperCase())
     }
 }

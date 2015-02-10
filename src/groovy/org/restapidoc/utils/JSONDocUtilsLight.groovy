@@ -187,6 +187,8 @@ public class JSONDocUtilsLight extends JSONDocUtils {
 
         path = extension ? path.replace(DEFAULT_FORMAT_NAME, extension) : path
 
+        println  "annotation.verb()=${annotation.verb()}"
+
         if (annotation.verb() != RestApiVerb.NULL) {
             //verb is defined in the annotation
             verb = method.getAnnotation(RestApiMethod.class).verb().name().toUpperCase()
@@ -237,8 +239,12 @@ public class JSONDocUtilsLight extends JSONDocUtils {
         apiMethodDoc.setQueryparameters(queryParameters.minus(null));
 
         if (method.isAnnotationPresent(RestApiBodyObject.class)) {
-            apiMethodDoc.setBodyobject(RestApiBodyObjectDoc.buildFromAnnotation(method));
-        } else if (verb.equals("POST") || verb.equals("PUT")) {
+            def bodyAnnotation = method.getAnnotation(RestApiBodyObject.class);
+            if (bodyAnnotation.name().trim() != "null") {
+                //apiMethodDoc.setBodyobject(RestApiBodyObjectDoc.buildFromAnnotation(method));
+                apiMethodDoc.setBodyobject(new ApiBodyObjectDoc(bodyAnnotation.name(), "", "", "Unknow", ""));
+            }
+        } else if (verb.equals("POST") || verb.equals("PUT") || verb.equals("PATCH")) {
             String currentDomain = getControllerDomainName(objectClasses, controller)
             apiMethodDoc.setBodyobject(new ApiBodyObjectDoc(currentDomain, "", "", "Unknow", ""));
         }
